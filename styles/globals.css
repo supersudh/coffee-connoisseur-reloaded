@@ -21,3 +21,10 @@ a {
 * {
   box-sizing: border-box;
 }
+
+:root {
+  --text-purple: rgb(33, 14, 239);
+  --text-purple-dark: rgb(14, 14, 16);
+  --text-black: rgb(3, 3, 5);
+  --text-white-100: #FFF;
+}
