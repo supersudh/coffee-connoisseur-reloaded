@@ -5,6 +5,7 @@ type Data = {
   name: string
 }
 
+// I AM A SERVERLESS FUNCTION
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
