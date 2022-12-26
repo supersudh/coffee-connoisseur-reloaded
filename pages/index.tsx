@@ -23,21 +23,21 @@ function renderCoffeeStores(coffeeStores: Array<CoffeeStores>) {
   if (!coffeeStores || coffeeStores?.length === 0) { return null; } // safety
   return coffeeStores.map((coffeeStore: any, i: number) => {
     const {
-      fsq_id,
+      id,
       name,
       imgUrl,
       address,
       neighbourhood,
       websiteUrl
     } = coffeeStore;
-    const key = `coffee-store-${fsq_id}`;
+    const key = `coffee-store-${id}`;
     return (
       <Card
         key={key}
         className={styles.card}
         name={name}
         imgUrl={imgUrl || 'https://images.unsplash.com/photo-1498804103079-a6351b050096?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2468&q=80'}
-        href={`/coffee-store/${fsq_id}`}
+        href={`/coffee-store/${id}`}
       />
     );
   });
@@ -45,7 +45,7 @@ function renderCoffeeStores(coffeeStores: Array<CoffeeStores>) {
 
 export default function Home(props: any) {
   const handleOnBannerBtnClick = () => {
-    console.log('hi banner button');
+    alert('Feature in progress! Interact below :-)');
   };
   const { coffeeStores } = props;
   return (
