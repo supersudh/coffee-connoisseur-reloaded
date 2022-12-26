@@ -1,19 +1,22 @@
-import classNames from "classnames";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Head from "next/head";
+import Image from "next/image";
+import classNames from "classnames";
+import isEmpty from 'lodash/isEmpty';
 
 import styles from '../../styles/Coffee-Store.module.css';
-import Image from "next/image";
 import CoffeeStoresApi from "../../lib/CoffeeStoresApi";
+import { StoreContext } from "../../store/store.context";
 
 export async function getStaticProps(staticProps: any) {
   const { params } = staticProps;
   const coffeeStores = await CoffeeStoresApi.fetchCoffeeStores();
-  const findCoffeeStoreById = coffeeStores.find(({ id }) => id === String(params.id));
+  const findCoffeeStoreById = coffeeStores.find(({ id }) => String(id) === String(params.id));
   return {
     props: {
-      coffeeStore: findCoffeeStoreById || {}
+      coffeeStore: findCoffeeStoreById ? findCoffeeStoreById : {}
     }
   };
 }
@@ -33,7 +36,8 @@ export async function getStaticPaths() {
   };
 }
 
-const CoffeeStore = (props: any) => {
+const CoffeeStore = (initialProps: any) => {
+  console.log(40, initialProps);
   const router = useRouter();
 
   if (router.isFallback) {
@@ -42,17 +46,35 @@ const CoffeeStore = (props: any) => {
     );
   }
 
+  const id = router.query.id;
+
+  const [coffeeStore, setCoffeeStore] = useState(initialProps.coffeeStore || {});
+
   const {
-    imgUrl,
+    state: {
+      coffeeStores
+    }
+  } = useContext(StoreContext) as any;
+  useEffect(() => {
+    if (initialProps.coffeeStore && Object.keys(initialProps.coffeeStore).length === 0) {
+      if (coffeeStores.length > 0) {
+        const findCoffeeStoreById = coffeeStores.find((coffeeStore: any) => coffeeStore.id.toString === id);
+        setCoffeeStore(findCoffeeStoreById);
+      }
+    }
+  }, [id])
+
+  const {
     address,
-    neighborhood,
     name,
-  } = props.coffeeStore;
-  
+    imgUrl,
+    neighborhood,
+  } = coffeeStore;
+
   const handleUpvoteButton = () => {
     alert('Thanks for upvoting!');
   };
-  
+
   return (
     <div className={styles.layout}>
       <Head>
