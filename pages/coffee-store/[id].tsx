@@ -10,9 +10,10 @@ import CoffeeStoresApi from "../../lib/CoffeeStoresApi";
 export async function getStaticProps(staticProps: any) {
   const { params } = staticProps;
   const coffeeStores = await CoffeeStoresApi.fetchCoffeeStores();
+  const findCoffeeStoreById = coffeeStores.find(({ id }) => id === String(params.id));
   return {
     props: {
-      coffeeStore: coffeeStores.find(({id}) => id === String(params.id))
+      coffeeStore: findCoffeeStoreById || {}
     }
   };
 }
