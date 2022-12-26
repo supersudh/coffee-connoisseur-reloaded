@@ -3,7 +3,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 LIVE DEMO PART 1
 
-![]https://github.com/supersudh/coffee-connoisseur-reloaded/blob/main/Demo1.gif
+![](Demo1.gif)
 
 ## Getting Started
 
