@@ -1,6 +1,10 @@
 ## This is a Typescript based Next.js Project
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+LIVE DEMO PART 1
+
+![]https://github.com/supersudh/coffee-connoisseur-reloaded/blob/main/Demo1.gif
+
 ## Getting Started
 
 First, run the development server:
