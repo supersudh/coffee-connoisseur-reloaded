@@ -1,8 +1,8 @@
 export interface CoffeeStores {
-  fsq_id: number;
+  id: number;
   name: string;
   imgUrl: string;
   websiteUrl: string;
   address: string;
-  neighbourhood: string;
+  neighborhood: string;
 }

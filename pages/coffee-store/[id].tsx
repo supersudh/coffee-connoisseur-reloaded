@@ -9,10 +9,10 @@ import CoffeeStoresApi from "../../lib/CoffeeStoresApi";
 
 export async function getStaticProps(staticProps: any) {
   const { params } = staticProps;
-  const coffeeStore = await CoffeeStoresApi.fetchCoffeeStoreByFSQID(params.id);
+  const coffeeStores = await CoffeeStoresApi.fetchCoffeeStores();
   return {
     props: {
-      coffeeStore
+      coffeeStore: coffeeStores.find(({id}) => id === String(params.id))
     }
   };
 }
@@ -22,7 +22,7 @@ export async function getStaticPaths() {
   const paths = coffeeStores.map((coffeeStore: any) => {
     return {
       params: {
-        id: String(coffeeStore.fsq_id),
+        id: String(coffeeStore.id),
       },
     };
   });
@@ -43,12 +43,13 @@ const CoffeeStore = (props: any) => {
 
   const {
     imgUrl,
-    location,
+    address,
+    neighborhood,
     name,
   } = props.coffeeStore;
   
   const handleUpvoteButton = () => {
-    console.log('Up vote! clicked!');
+    alert('Thanks for upvoting!');
   };
   
   return (
@@ -76,11 +77,11 @@ const CoffeeStore = (props: any) => {
         <div className={classNames(styles.col2, 'glass')}>
           <div className={styles.iconWrapper}>
             <Image src="/static/icons/places.svg" width="24" height="24" alt="" />
-            <p className={styles.text}>{location?.address ?? 'N/A'}</p>
+            <p className={styles.text}>{address || 'N/A'}</p>
           </div>
           <div className={styles.iconWrapper}>
             <Image src="/static/icons/near_me.svg" width="24" height="24" alt="" />
-            <p className={styles.text}>{location.neighborhood?.[0] ?? 'N/A'}</p>
+            <p className={styles.text}>{neighborhood || 'N/A'}</p>
           </div>
           <div className={styles.iconWrapper}>
             <Image src="/static/icons/star.svg" width="24" height="24" alt="" />
